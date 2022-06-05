@@ -6,7 +6,6 @@ module.exports = {
   },
     loader: 'custom',
     domains: ['media.graphcms.com'],
-  },
   // exportPathMap: async function (
   //   defaultPathMap,
   //   { dev, dir, outDir, distDir, buildId }
