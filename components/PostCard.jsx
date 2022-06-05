@@ -12,7 +12,6 @@ export default function PostCard( {post} ) {
     const [likes, setLikes] = useState(post.like);
     const [dislikes, setDislikes] = useState(post.dislike);
 
-    
 
     const sendEmotions = (type) => {
         if (type === "like") {

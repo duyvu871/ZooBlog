@@ -189,9 +189,15 @@ export const getCategoryPost = async (slug) => {
                 bio
                 name
                 id
+                follows
                 photo {
                   url
                 }
+              }
+              like
+              dislike
+              comments {
+                  id
               }
               createdAt
               slug
@@ -217,7 +223,7 @@ export const getCategoryPost = async (slug) => {
   
   export const getFeaturedPosts = async () => {
     const query = gql`
-      query GetCategoryPost() {
+      query GetFeaturedPost() {
         posts(where: {featuredPost: true}) {
           author {
             name
