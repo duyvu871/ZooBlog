@@ -15,12 +15,6 @@ const PostDetails = ({ post }) =>  {
             <div className='col-span-1 lg:col-span-8'>
                 <Page.PostDetail post={post} />
                 <h3 className='text-cl mb-8 font-semibold border-b pb-4 mx-8'>Tác giả</h3>
-
-
-                <Page.Author author={post.author} />
-                <Page.CommentsForm slug={post.slug} />
-                <Page.Comments slug={post.slug} />
-
                 <Page.Author author={post.author} />
                 {/* <Page.CommentsForm slug={post.slug} />
                 <Page.Comments slug={post.slug} /> */}
