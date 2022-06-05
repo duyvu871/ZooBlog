@@ -15,23 +15,16 @@ const PostDetails = ({ post }) =>  {
             <div className='col-span-1 lg:col-span-8'>
                 <Page.PostDetail post={post} />
                 <h3 className='text-cl mb-8 font-semibold border-b pb-4 mx-8'>Tác giả</h3>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 
                 <Page.Author author={post.author} />
                 <Page.CommentsForm slug={post.slug} />
                 <Page.Comments slug={post.slug} />
-=======
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
+
                 <Page.Author author={post.author} />
                 {/* <Page.CommentsForm slug={post.slug} />
                 <Page.Comments slug={post.slug} /> */}
                 <Page.Comment slug={post.slug} />
-<<<<<<< HEAD
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
             </div>
             <div className='col-span-1 lg:col-span-4'>
                 <div className='relative lg:sticky top-8'>

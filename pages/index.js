@@ -13,10 +13,14 @@ const Home = ({ posts }) => {
       </Head>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> f26851b (add some feature in postcard and login page)
+=======
+      
+>>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
 =======
       
 >>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
@@ -29,10 +33,14 @@ const Home = ({ posts }) => {
           <div className="lg:col-span-8 col-span-1">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             {posts.reverse().map((post, index) => <PostCard post={post.node} key={post.node.title} /> )}
 =======
             {posts.slice().reverse().map((post, index) => <PostCard post={post.node} key={post.node.title} /> )}
 >>>>>>> f26851b (add some feature in postcard and login page)
+=======
+            {posts.slice().reverse().map((post, index) => <PostCard post={post.node} key={post.node.title} /> )}
+>>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
 =======
             {posts.slice().reverse().map((post, index) => <PostCard post={post.node} key={post.node.title} /> )}
 >>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8

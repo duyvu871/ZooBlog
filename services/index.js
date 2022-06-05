@@ -13,14 +13,7 @@ export const getPosts = async () => {
                             id
                             name
                             email
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                             follows
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-                            follows
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
                             photo {
                                 url
                             }
@@ -28,21 +21,12 @@ export const getPosts = async () => {
                                 url
                             }
                         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
                         comments {
                             id
                         }
                         id
                         like
                         dislike
-<<<<<<< HEAD
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
                         createdAt
                         slug
                         excerpt
@@ -254,13 +238,8 @@ export const getCategoryPost = async (slug) => {
     const result = await request(graphqlAPI, query);
   
     return result.posts;
-<<<<<<< HEAD
-<<<<<<< HEAD
   };
-=======
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
-  };
+
 
 export const submitEmotions = async (obj) => {
     const result = await fetch('/api/emotions',{
@@ -287,9 +266,5 @@ export const getEmotions = async (option) => {
     const result = await request(graphqlAPI, query, option);
 
     return result.post
-<<<<<<< HEAD
 }
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-}
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
+

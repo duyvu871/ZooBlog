@@ -1,15 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-export default function Author({ author }) {
-  return (
-    <div className='px-10'> 
-        <Image 
-=======
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
 const myLoader = ({ src, width, quality }) => {
   return src
 }
@@ -20,10 +11,6 @@ export default function Author({ author }) {
     <div className='px-10'> 
         <Image 
           loader={myLoader}
-<<<<<<< HEAD
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
           src={author.background.url} 
           alt=""
           width='1000px'
@@ -34,17 +21,8 @@ export default function Author({ author }) {
         />
         <div className='text-center h-48 relative rounded-b-lg bg-black bg-opacity-30'>
           <div className='absolute left-6 right-2 -top-9 flex align-center'>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <Image 
-=======
             <Image
                 loader={myLoader} 
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-            <Image
-                loader={myLoader} 
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
                 src={author.photo.url} 
                 alt={author.name}
                 height="70px"

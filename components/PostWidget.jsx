@@ -4,19 +4,10 @@ import Link from 'next/link';
 import { getSimilarPosts, getRecentPosts } from '../services' 
 import Image from 'next/image';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
 const myLoader = ({ src, width, quality }) => {
   return src
 }
 
-<<<<<<< HEAD
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
 export default function PostWidget({ categories, slug }) {
   const [relatedPosts, setRelatedPosts] = useState([]);
   useEffect(() => {
@@ -39,14 +30,7 @@ export default function PostWidget({ categories, slug }) {
           <div key={post.title} className='flex items-center w-full mb-4'>
               <div className='w-16 flex-none'>
                   <Image 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                     loader={myLoader}
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-                    loader={myLoader}
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
                     src={post.featuredImage.url} 
                     alt={post.title}
                     height='40px'

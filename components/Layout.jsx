@@ -17,19 +17,10 @@ export default function Layout({ children }) {
   const hideProfile = () => {
     setShowProfile(false)
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-  
-=======
   const myLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`
   }
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-  const myLoader = ({ src, width, quality }) => {
-    return `/${src}?w=${width}&q=${quality || 75}`
-  }
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
+
   return (
     <>
       <Header />
@@ -48,19 +39,9 @@ export default function Layout({ children }) {
            onClick={showProfile}
       >
         <Image
-<<<<<<< HEAD
-<<<<<<< HEAD
           src='/arrow left.svg'
-=======
           loader={myLoader}
-          src='arrow left.svg'
           alt='Arrow left'
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-          loader={myLoader}
-          src='arrow left.svg'
-          alt='Arrow left'
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
           width='20px'
           height='20px'
           className='bg-black-600'
@@ -75,19 +56,9 @@ export default function Layout({ children }) {
         <Link href='https://www.facebook.com/profile.php?id=100017123670001' passHref >
           <a target='_blank'>
               <Image 
-<<<<<<< HEAD
-<<<<<<< HEAD
                 src='/icons8-facebook.svg'
-=======
                 loader={myLoader}
-                src='icons8-facebook.svg'
                 alt='Facebook'
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-                loader={myLoader}
-                src='icons8-facebook.svg'
-                alt='Facebook'
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
                 width='30px'
                 height='30px'
               ></Image>
@@ -96,19 +67,9 @@ export default function Layout({ children }) {
         <Link href='https://www.instagram.com/buidu98/' passHref >
           <a target='_blank'>
           <Image 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                src='/icons8-instagram.svg'
-=======
                 loader={myLoader}
                 src='icons8-instagram.svg'
                 alt='instagram'
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-                loader={myLoader}
-                src='icons8-instagram.svg'
-                alt='instagram'
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
                 width='30px'
                 height='30px'
                 //className='bg-pink-600'
@@ -117,21 +78,10 @@ export default function Layout({ children }) {
         </Link>
         <Link href='https://github.com/duyvu871' passHref >
           <a target='_blank'>
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <Image 
-                src='/icons8-octocat-48.png'
-=======
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
           <Image          
                 loader={myLoader}
                 src='icons8-octocat-48.png'
                 alt='github'
-<<<<<<< HEAD
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
                 width='30px'
                 height='30px'
                 className='bg-black-600 '
@@ -140,19 +90,9 @@ export default function Layout({ children }) {
         </Link>
         <div onClick={hideProfile} className='w-fit flex'>
           <Image
-<<<<<<< HEAD
-<<<<<<< HEAD
-             src='/arrow right.svg'
-=======
               loader={myLoader}
              src='arrow right.svg'
              alt='hide'
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-              loader={myLoader}
-             src='arrow right.svg'
-             alt='hide'
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
              width='30px'
              height='30px'
              className='bg-black-600'

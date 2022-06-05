@@ -1,87 +1,4 @@
-import React from 'react'
-import moment from 'moment';
-import Link from 'next/link';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import fontawesome from '@fortawesome/fontawesome';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faCalendar } from '@fortawesome/free-solid-svg-icons'
-import Image from 'next/image'
 
-fontawesome.library.add(faCoffee, faCalendar)
-
-export default function PostCard( {post} ) {
-  return (
-    <div className="bg-white border-b rounded-lg mx-2 lg:p-8 py-4 lg:mb-8 flex flex-row">
-        <div className="block  mb-8 w-fit">
-            <div className="flex items-center justify-center lg:mb-0  lg:w-auto w-16 cursor-pointer">
-                <Image 
-                    alt={post.author.name}
-                    height="30px"
-                    width="30px"
-                    className="align-middle rounded-full"
-                    src={post.author.photo.url}
-                />
-                
-            </div>
-           
-        </div>
-        <div className='flex flex-col pr-3'>
-                <p className="inline align-middle text-blue-600 text-sm">{post.author.name}</p>
-                <div className="font-medium text-gray-700">
-                    {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg> */}
-                    <span className='text-xs'>{moment(post.createdAt).format('M /D/ YYYY, h:mm A')}</span>
-                </div>
-                <div className="relative overflow-hidden shadow-md mb-6 hidden"> 
-                    <Image 
-                        src={post.featuredImage.url}
-                        alt={post.title}
-                        layout="responsive"
-                        height="500px"
-                        width='1000px'
-                        className="object-top absolute object-cover shadow-lg lg:rounded-lg"
-                    />
-                </div>
-                <h1 className="transition duration-700  mb-1 w-fit text-left cursor-pointer
-                        hover:text-pink-600 text-xl font-normal
-                ">
-                    <Link href={`/post/${post.slug}`} passHref>
-                        {post.title}
-                    </Link>
-                </h1>   
-            
-                <p className='text-xs text-gray-700 font-normal  lg:px-20 line-clamp-2 lg:line-clamp-none'>{post.excerpt}</p>
-                <div className='flex flex-row pt-1'>
-                   {
-                       post.categories.map(category => (
-                        <div className='bg-gray-200 rounded-lg p-1 text-xs mr-2' key={category.slug}>
-                           <Link href={`/category/${category.slug}`} passHref> 
-                                {category.name}
-                            </Link>
-                        </div>
-                       ))
-                   }
-                </div>
-                {/* <div className='text-center'>
-                    <Link href={`/post/${post.slug}`} passHref>
-                        <span className='
-                            transition duration-500 transform 
-                            hover:-translate-y-1 inline-block 
-                            bg-pink-600 text-lg 
-                            font-medium rounded-full 
-                            px-8 py-3 
-                            text-white cursor-pointer
-                        '>
-                            Continue Reading
-                        </span>
-                    </Link>
-                </div> */}
-        </div>
-=======
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
 import Image from 'next/image';
 import { useState } from 'react';
 import { submitEmotions, getEmotions} from '../services';
@@ -243,10 +160,6 @@ export default function PostCard( {post} ) {
                 </div>
             </div>
       </div>
-<<<<<<< HEAD
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
     </div>
   )
 }

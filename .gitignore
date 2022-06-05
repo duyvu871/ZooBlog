@@ -16,11 +16,6 @@
 /build
 
 # misc
-<<<<<<< HEAD
-.DS_Store
-=======
-.DS_Store 
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
 *.pem
 
 # debug

@@ -2,15 +2,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "build": "next build",
-=======
     "build": "next build && next export",
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
     "build": "next build && next export",
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
+    "build": "next build && next export",
     "start": "next start"
   },
   "dependencies": {

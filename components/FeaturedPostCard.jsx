@@ -3,19 +3,10 @@ import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
 const myLoader = ({ src, width, quality }) => {
   return src
 }
 
-<<<<<<< HEAD
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
 const FeaturedPostCard = ({ post }) => (
   <div className="relative h-56 ">
     <div className="absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-56 " style={{ backgroundImage: `url('${post.featuredImage.url}')` }} />
@@ -25,14 +16,7 @@ const FeaturedPostCard = ({ post }) => (
       <p className="text-white mb-4 text-shadow font-semibold text-lg text-center line-clamp-2 lg:line-clamp-none">{post.title}</p>
       <div className="flex items-center absolute bottom-5 w-full justify-center">
         <Image
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
           loader={myLoader}
->>>>>>> f26851b (add some feature in postcard and login page)
-=======
-          loader={myLoader}
->>>>>>> eb93c9b6dbac04344a67d537f9850680ea46dea8
           alt={post.author.name}
           height="30px"
           width="30px"
