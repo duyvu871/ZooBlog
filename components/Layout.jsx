@@ -39,7 +39,7 @@ export default function Layout({ children }) {
            onClick={showProfile}
       >
         <Image
-          src='/arrow left.svg'
+          src='arrow left.svg'
           loader={myLoader}
           alt='Arrow left'
           width='20px'
@@ -56,7 +56,7 @@ export default function Layout({ children }) {
         <Link href='https://www.facebook.com/profile.php?id=100017123670001' passHref >
           <a target='_blank'>
               <Image 
-                src='/icons8-facebook.svg'
+                src='icons8-facebook.svg'
                 loader={myLoader}
                 alt='Facebook'
                 width='30px'
