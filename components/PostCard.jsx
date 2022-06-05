@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { submitEmotions, getEmotions} from '../services';
+import Link from 'next/link';
 
 const myLoader = ({ src, width, quality }) => {
     return src;
