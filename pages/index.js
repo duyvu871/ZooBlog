@@ -3,8 +3,6 @@ import { PostCard, Categories, PostWidget, FeaturedPosts, ScrollToTop, Author} f
 import { getPosts} from '../services';
 
 const Home = ({ posts }) => {
-
-
   return (
     <div className="container mx-auto mb-8 ">
       <Head>
@@ -35,7 +33,7 @@ const Home = ({ posts }) => {
 
 export default Home
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const posts =  (await getPosts())  || [];
 
   return {

@@ -36,7 +36,7 @@ const PostDetails = ({ post }) =>  {
 
 export default PostDetails
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const data = await getPostsDetails(params.slug);
     
     return {
