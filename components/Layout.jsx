@@ -39,7 +39,7 @@ export default function Layout({ children }) {
            onClick={showProfile}
       >
         <Image
-          src='arrow left.svg'
+          src='arrow-left.svg'
           loader={myLoader}
           alt='Arrow left'
           width='20px'
@@ -91,7 +91,7 @@ export default function Layout({ children }) {
         <div onClick={hideProfile} className='w-fit flex'>
           <Image
               loader={myLoader}
-             src='arrow right.svg'
+             src='arrow-right.svg'
              alt='hide'
              width='30px'
              height='30px'

@@ -5,7 +5,7 @@ import { submitEmotions, getEmotions} from '../services';
 import Link from 'next/link';
 
 const myLoader = ({ src, width, quality }) => {
-    return src;
+    return `${src}?w=${width}&q=${quality || 75}`;
 };
 
 export default function PostCard( {post} ) {
@@ -24,7 +24,7 @@ export default function PostCard( {post} ) {
                     id: post.id,
                     slug: post.slug,
                 }).then(_ => {
-                    setLikes(res.likelike + 1);
+                    setLikes(res.like + 1);
                 });
             });
         } else if (type === "dislike") {

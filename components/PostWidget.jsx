@@ -5,7 +5,7 @@ import { getSimilarPosts, getRecentPosts } from '../services'
 import Image from 'next/image';
 
 const myLoader = ({ src, width, quality }) => {
-  return src
+  return `${src}?w=${width}&q=${quality || 75}`
 }
 
 export default function PostWidget({ categories, slug }) {

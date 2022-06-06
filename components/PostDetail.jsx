@@ -6,7 +6,7 @@ import { faCoffee, faCalendar } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 
 function myLoader({ src, width, quality }) {
-  return src;
+  return `${src}?w=${width}&q=${quality || 75}`;
 }
 
 export default function PostDetail({ post }) {
