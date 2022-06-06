@@ -44,13 +44,15 @@ export async function getServerSideProps({ params }) {
     }
 }
 
-export async function getStaticPaths() {
-    const posts = await getPosts();
-
-    return {
-        paths: posts.map(
-            ({ node: { slug } }) => ({params: {slug}})
-        ),
-        fallback: true
-    }
-}
+// export async function getStaticPaths() {
+//     const posts = await getPosts();
+//     console.log(posts.map(
+//         ({ node: { slug } }) => ({params: {slug}})
+//     ))
+//     return {
+//         paths: posts.map(
+//             ({ node: { slug } }) => ({params: {slug}})
+//         ),
+//         fallback: true
+//     }
+// }
