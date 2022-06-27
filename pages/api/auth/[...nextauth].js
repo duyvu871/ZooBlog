@@ -14,7 +14,7 @@ const graphQLClient = new GraphQLClient(graphqlAPI, {
 
 
 
-export default (req, res) => NextAuth(req, res, {
+export default NextAuth({
   pages: {
     signIn: '/auth/credentials-signin',
     signOut: '/auth/signout',
