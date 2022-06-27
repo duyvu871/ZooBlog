@@ -44,14 +44,12 @@ export async function getServerSideProps(context) {
   const posts =  (await getPosts())  || [];
   const session = await getSession(context);  
   const id = session ? session.userId : undefined;
-  const user = id ? (await getUserProfileById(id)) || undefined : [];
+  const user = id ? (await getUserProfileById(id)) || undefined : null;
 
   return {
     props: { 
       posts,
-      user : {
-        user
-      }
+      user 
     }
   }
 }

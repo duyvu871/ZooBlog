@@ -6,7 +6,7 @@ import myLoader from '../../lib/loader'
 export default function MenuUser({ user }) {
   const flexCenter = 'flex place-content-center'
   if (!user) {
-    return ;
+    return null ;
   }
   return (
     <div className="place-content-between flex flex-row mx-2  h-[50px] mb-[1rem] mr-[40px]">
