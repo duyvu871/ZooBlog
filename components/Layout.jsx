@@ -58,7 +58,7 @@ export default function Layout({ children }) {
            onClick={showProfile}
       >
         <Image
-          src='arrow-left.svg'
+          src='/arrow-left.svg'
           unoptimized
           alt='Arrow left'
           width='20px'
@@ -75,7 +75,7 @@ export default function Layout({ children }) {
         <Link href='https://www.facebook.com/profile.php?id=100017123670001' passHref >
           <a target='_blank'>
               <Image 
-                src='icons8-facebook.svg'
+                src='/icons8-facebook.svg'
                 // loader={myLoader}
                 unoptimized
                 alt='Facebook'
@@ -89,7 +89,7 @@ export default function Layout({ children }) {
           <Image 
                 // loader={myLoader}
                 unoptimized
-                src='icons8-instagram.svg'
+                src='/icons8-instagram.svg'
                 alt='instagram'
                 width='30px'
                 height='30px'
@@ -102,7 +102,7 @@ export default function Layout({ children }) {
           <Image          
                 // loader={myLoader}
                 unoptimized
-                src='icons8-octocat-48.png'
+                src='/icons8-octocat-48.png'
                 alt='github'
                 width='30px'
                 height='30px'
@@ -114,7 +114,7 @@ export default function Layout({ children }) {
           <Image
               // loader={myLoader}
               unoptimized
-             src='arrow-right.svg'
+             src='/arrow-right.svg'
              alt='hide'
              width='30px'
              height='30px'
