@@ -1,26 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import useModal from './Modal/useModal';
 import MenuModal from './Modal/MenuModal';
 import { ScrollToTop } from '.';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { getSession } from 'next-auth/react';
+import { getCategories } from '../services';
+
+const myLoader = ({src, width, quality}) => {
+  return src;
+}
+
+
 
 export default function Layout({ children }) {
+  const [categories, setCategories] = useState([]);
   const {isShowing, toggle} = useModal();
-  const [isShowProfile, setShowProfile] = useState(false)
-  
+  const [isShowProfile, setShowProfile] = useState(false);
+  const [isUser, setUserState] = useState(false);
+
   const showProfile = () => {
     setShowProfile(true)
   }
   const hideProfile = () => {
     setShowProfile(false)
   }
-  const myLoader = ({ src, width, quality }) => {
-    return `/${src}?w=${width}&q=${quality || 75}`
-  }
 
+  useEffect(() => {
+      getCategories()
+          .then( newCategories => { 
+            setCategories(newCategories)
+          })
+      getSession()
+          .then(session => {
+            if (session) {
+              setUserState(true)
+            }
+          })
+  }, [])
+  
   return (
     <>
       <Header />
@@ -32,7 +51,7 @@ export default function Layout({ children }) {
               <g><path d="M377.5,561.3H71.3c-33.8,0-61.3,27.4-61.3,61.2v306.3c0,33.8,27.4,61.2,61.3,61.2h306.3c33.8,0,61.3-27.4,61.3-61.2V622.5C438.8,588.6,411.3,561.3,377.5,561.3z M316.3,869.4H132.5V683.8h183.8V869.4z M928.8,10H622.5c-33.9,0-61.3,27.4-61.3,61.3v306.3c0,33.8,27.4,61.3,61.3,61.3h306.3c33.9,0,61.3-27.4,61.3-61.3V71.2C990,37.4,962.6,10,928.8,10z M867.5,318.1H683.8l0-185.6h183.8L867.5,318.1z M377.5,10H71.3C37.4,10,10,37.4,10,71.2v306.3c0,33.8,27.4,61.3,61.3,61.3h306.3c33.8,0,61.3-27.4,61.3-61.3V71.2C438.8,37.4,411.3,10,377.5,10z M316.3,318.1H132.5V132.5h183.8V318.1z M928.8,561.3H622.5c-33.9,0-61.3,27.4-61.3,61.2v306.3c0,33.8,27.4,61.2,61.3,61.2h306.3c33.9,0,61.3-27.4,61.3-61.2V622.5C990,588.6,962.6,561.3,928.8,561.3z M867.5,869.4H683.8V683.8h183.8V869.4z"/></g>
           </svg>
         </div>
-        <MenuModal isShowing={isShowing} hide={toggle}>                        
+        <MenuModal isShowing={isShowing} hide={toggle} isUser={isUser} categories={categories}>                        
         </MenuModal>
       </div>
       <div className='fixed flex right-0 top-[15vh] bg-[#666] py-4 px-2 z-800 rounded-l-lg' 
@@ -40,7 +59,7 @@ export default function Layout({ children }) {
       >
         <Image
           src='arrow-left.svg'
-          loader={myLoader}
+          unoptimized
           alt='Arrow left'
           width='20px'
           height='20px'
@@ -57,7 +76,8 @@ export default function Layout({ children }) {
           <a target='_blank'>
               <Image 
                 src='icons8-facebook.svg'
-                loader={myLoader}
+                // loader={myLoader}
+                unoptimized
                 alt='Facebook'
                 width='30px'
                 height='30px'
@@ -67,7 +87,8 @@ export default function Layout({ children }) {
         <Link href='https://www.instagram.com/buidu98/' passHref >
           <a target='_blank'>
           <Image 
-                loader={myLoader}
+                // loader={myLoader}
+                unoptimized
                 src='icons8-instagram.svg'
                 alt='instagram'
                 width='30px'
@@ -79,7 +100,8 @@ export default function Layout({ children }) {
         <Link href='https://github.com/duyvu871' passHref >
           <a target='_blank'>
           <Image          
-                loader={myLoader}
+                // loader={myLoader}
+                unoptimized
                 src='icons8-octocat-48.png'
                 alt='github'
                 width='30px'
@@ -90,7 +112,8 @@ export default function Layout({ children }) {
         </Link>
         <div onClick={hideProfile} className='w-fit flex'>
           <Image
-              loader={myLoader}
+              // loader={myLoader}
+              unoptimized
              src='arrow-right.svg'
              alt='hide'
              width='30px'

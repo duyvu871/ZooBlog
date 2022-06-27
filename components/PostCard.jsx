@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { submitEmotions, getEmotions} from '../services';
 import Link from 'next/link';
+import { useRef } from 'react';
 
 const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`;

@@ -1,15 +1,22 @@
 import Head from 'next/head';
 import { PostCard, Categories, PostWidget, FeaturedPosts, ScrollToTop, Author} from '../components';
+import MenuUser from '../components/User/MenuUser'
 import { getPosts} from '../services';
+import { getSession } from 'next-auth/react';
+import { getUserProfileById } from '../services/user';
+import { useState }  from 'react'
 
-const Home = ({ posts }) => {
+const Home = ({ posts, user }) => {
+  
   return (
     <div className="container mx-auto mb-8 ">
       <Head>
-        <title>Blog</title>
+        <title>My Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+     
 
+      <MenuUser user={user} />
       <FeaturedPosts />
       <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12"> 
         <div className='col-span-1 lg:col-span-8'>
@@ -33,10 +40,18 @@ const Home = ({ posts }) => {
 
 export default Home
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const posts =  (await getPosts())  || [];
+  const session = await getSession(context);  
+  const id = session ? session.userId : undefined;
+  const user = id ? (await getUserProfileById(id)) || undefined : [];
 
   return {
-    props: { posts }
+    props: { 
+      posts,
+      user : {
+        user
+      }
+    }
   }
 }

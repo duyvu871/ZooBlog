@@ -1,3 +1,4 @@
+import { faLessThanEqual } from '@fortawesome/free-solid-svg-icons';
 import { stringify } from 'querystring';
 import React, { useState, useEffect, useRef } from 'react';
 import validator from 'validator';
@@ -5,6 +6,7 @@ import { submitComment } from '../services';
 import Comments from './Comments';
 
 export default function Comment({ slug }) {
+    const [isDisable, setDisableState] = useState(false)
     const [isUpdate, setUpdateState] = useState(false)
 
     const [isMessageSuccess, setMessageStatus] = useState(false)
@@ -82,10 +84,12 @@ export default function Comment({ slug }) {
         submitComment(commentObj)
                 .then(res => {
                     setMessageStatus(true); 
+                    setDisableState(true);
 
                     setTimeout(() => {
                         setMessageStatus(false);
                         setUpdateState(true);
+                        setDisableState(false);
                     },3000);
                 })
     }
@@ -137,6 +141,7 @@ export default function Comment({ slug }) {
             <button 
               type='button' 
               onClick={handleCommentSubmission}
+              disabled={isDisable}
               className='transition duration-500 ease hover:bg-indigo-600 inline-block bg-pink-600 text-lg rounded-full px-8 py-2 cursor-pointer text-white'
             >
                 Đăng
