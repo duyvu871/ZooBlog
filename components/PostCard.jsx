@@ -1,19 +1,18 @@
-import React from 'react'
 import moment from 'moment';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { submitEmotions, getEmotions} from '../services';
+import Link from 'next/link';
+import { useRef } from 'react';
 
 const myLoader = ({ src, width, quality }) => {
-    return src;
+    return `${src}?w=${width}&q=${quality || 75}`;
 };
 
 export default function PostCard( {post} ) {
     const [likes, setLikes] = useState(post.like);
     const [dislikes, setDislikes] = useState(post.dislike);
 
-    
 
     const sendEmotions = (type) => {
         if (type === "like") {
@@ -26,7 +25,7 @@ export default function PostCard( {post} ) {
                     id: post.id,
                     slug: post.slug,
                 }).then(_ => {
-                    setLikes(res.likelike + 1);
+                    setLikes(res.like + 1);
                 });
             });
         } else if (type === "dislike") {

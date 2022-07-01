@@ -2,9 +2,10 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    loader: 'custom',
     domains: ['media.graphcms.com'],
   },
+    loader: 'custom',
+    domains: ['media.graphcms.com'],
   // exportPathMap: async function (
   //   defaultPathMap,
   //   { dev, dir, outDir, distDir, buildId }

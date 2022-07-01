@@ -21,11 +21,11 @@ export default function Header() {
                 <div className="md:float-left block">
                     <Link href="/" passHref >
                         <span className="cursor-pointer font-bold text-2xl ">
-                            <span className='text-pink-600'>Hentai</span><span className='text-yellow-500'>With</span><span className='text-blue-600'>Me</span>
+                            <span className='text-pink-600'>My</span><span className='text-yellow-500'>P</span><span className='text-blue-600'>B</span>
                         </span>
                     </Link>
                 </div>
-                <div className="hidden md:float-left md:contents">
+                {/* <div className="hidden md:float-left md:contents">
                     {categories.map(category => (
                         <Link href={`/category/${category.slug}`} key={category.slug} passHref >
                             <span className="md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer"> 
@@ -33,7 +33,7 @@ export default function Header() {
                             </span>
                         </Link>
                     ))}
-                </div>
+                </div> */}
             </div>
         </div>
     )

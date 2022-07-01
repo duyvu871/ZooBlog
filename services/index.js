@@ -189,9 +189,15 @@ export const getCategoryPost = async (slug) => {
                 bio
                 name
                 id
+                follows
                 photo {
                   url
                 }
+              }
+              like
+              dislike
+              comments {
+                  id
               }
               createdAt
               slug
@@ -217,7 +223,7 @@ export const getCategoryPost = async (slug) => {
   
   export const getFeaturedPosts = async () => {
     const query = gql`
-      query GetCategoryPost() {
+      query GetFeaturedPost() {
         posts(where: {featuredPost: true}) {
           author {
             name
@@ -239,6 +245,7 @@ export const getCategoryPost = async (slug) => {
   
     return result.posts;
   };
+
 
 export const submitEmotions = async (obj) => {
     const result = await fetch('/api/emotions',{
@@ -266,3 +273,4 @@ export const getEmotions = async (option) => {
 
     return result.post
 }
+

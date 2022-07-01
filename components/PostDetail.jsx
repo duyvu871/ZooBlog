@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faCalendar } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 
-const myLoader = ({ src, width, quality }) => {
-  return src
+function myLoader({ src, width, quality }) {
+  return `${src}?w=${width}&q=${quality || 75}`;
 }
 
 export default function PostDetail({ post }) {
