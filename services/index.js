@@ -102,6 +102,7 @@ export const getCategories = async () => {
             categories {
                 name
                 slug
+                id
               }
         }
     `
@@ -274,3 +275,17 @@ export const getEmotions = async (option) => {
     return result.post
 }
 
+export const getAuthors = async () => {
+    const query = gql`
+        query GetAuthors {
+            authors {
+                name
+                id
+            }
+        }
+    `;
+
+    const result = await request(graphqlAPI, query);
+
+    return result.authors
+}
