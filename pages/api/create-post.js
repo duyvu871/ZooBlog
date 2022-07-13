@@ -68,7 +68,7 @@ export default async function createUser(req, res) {
 
         const result = await graphQLClient.request(createPost, data);
 
-        return res.status(200).send(data);
+        return res.status(200).send(result);
         
     } catch (error) {
         return res.status(500).send(error);

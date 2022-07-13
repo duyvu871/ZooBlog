@@ -86,6 +86,12 @@ const Write = ({ categories, authors }) => {
               "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
+        }).then(res => {
+            if (res?.createPost?.id) {
+                alert('Dăng bài thành công')
+            } else {
+                alert('không thành công, hãy thử lại sau')
+            }
         })
         console.log(data);
     }
