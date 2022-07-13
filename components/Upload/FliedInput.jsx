@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FliedInput({ setFliedUpload, icon, placeholder }) {
+export default function FliedInput({ setFieldUpload, icon, placeholder, validate }) {
   return (
     <div className='flex mx-4 my-8'>
         <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -14,7 +14,7 @@ export default function FliedInput({ setFliedUpload, icon, placeholder }) {
             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
             dark:focus:ring-blue-500 dark:focus:border-blue-500" 
             placeholder={placeholder} 
-            onBlur={({target}) => setFliedUpload(target.value)}
+            onBlur={({target}) => setFieldUpload(validate(target.value, placeholder))}
         />
     </div>
   )

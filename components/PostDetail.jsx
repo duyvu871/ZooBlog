@@ -2,9 +2,10 @@ import React from 'react'
 import moment from 'moment';
 import Image from 'next/image';
 import Link from 'next/link';
+import { isUrl } from '../lib/exception';
 
 function myLoader({ src, width, quality }) {
-  return `${src}?w=${width}&q=${quality || 75}`;
+  return `${src}`;
 }
 
 export default function PostDetail({ post }) {
@@ -23,6 +24,22 @@ export default function PostDetail({ post }) {
     
           if (obj.underline) {
             modifiedText = (<u key={index}>{text}</u>);
+          }
+
+          if (obj?.title == '(Image)') {
+            modifiedText = ( 
+                <Image
+                  // loader={myLoader}
+                  unoptimized
+                  key={index}
+                  alt={obj.title}
+                  height={obj?.height || 1000}
+                  width={obj?.width || 1000}
+                  // layout='responsive'
+                  objectFit='cover'
+                  src={obj?.href || '/bg.jpg'}
+                />
+            )
           }
         }
 
@@ -48,7 +65,6 @@ export default function PostDetail({ post }) {
               return modifiedText;
           }
     };
-
   return (
     <div className='bg-white  lg:rounded-lg lg:p-8 pb-12 mb-8 border-b-8'>
       <div className='px-2'>
@@ -64,8 +80,7 @@ export default function PostDetail({ post }) {
             </h3>
             {post.categories.map(category => {
               return (
-                <>
-                   <h3>
+                   <h3 key={category.slug}>
                     <span className='text-[15px]'>{'  / '}</span>
                     <span className='text-[#db2777]'>
                         <Link 
@@ -77,8 +92,6 @@ export default function PostDetail({ post }) {
                         </Link>
                     </span>
                   </h3>
-                  
-               </>
               )
             })}
             <h3>
@@ -106,7 +119,8 @@ export default function PostDetail({ post }) {
             <div className='flex items-center w-full justify-around flex-row'>
             <div className="flex items-center mb-4 lg:mb-0 w-full lg:w-auto mr-8 cursor-pointer">
                 <Image
-                    loader={myLoader} 
+                    // loader={myLoader} 
+                    unoptimized
                     alt={post.author.name}
                     height="30px"
                     width="30px"
@@ -127,8 +141,13 @@ export default function PostDetail({ post }) {
             </h1>
             <div className='relative overflow-hidden shadow-md mb-6 border-t-4 border-black-600'>
               <Image 
-                  loader={myLoader}
-                  src={post.featuredImage.url} 
+                  // loader={myLoader}
+                  unoptimized
+                  src={
+                    post?.featuredImage?.url 
+                    || post?.featuredImageUrl
+                    || '/bg.jpg'
+                  } 
                   alt={post.title}
                   objectFit="cover"
                   layout='responsive'
@@ -137,15 +156,19 @@ export default function PostDetail({ post }) {
                   className='object-top lg:rounded-t-lg ' 
               />
           </div>
-            {/* {post.content.raw.children.map((typeObj, index) => {
-                const children = typeObj.children.map((item, itemIndex) => getContentFragment(itemIndex, item.text, item))
-
-                return getContentFragment(index, children, typeObj, typeObj.type)
-            })} */}
+           <pre className='post-render'>
+              {post.content.raw.children.map((typeObj, index) => {
+                  const children = typeObj.children.map((item, itemIndex) => 
+                      getContentFragment(itemIndex, item.text, item)
+                  )
+                  // console.log(children);
+                  return getContentFragment(index, children, typeObj, typeObj.type)
+              })}
+           </pre>
             {/* dangerouslySetInnerHTML={{__html:}} */}
-            <pre className='post-render ' dangerouslySetInnerHTML={{__html: post.content.html}}>
+            {/* <pre className='post-render ' dangerouslySetInnerHTML={{__html: post.content.html}}>
 
-            </pre>
+            </pre> */}
         </div>
     </div>
   )

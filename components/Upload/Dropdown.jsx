@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function Dropdown({ list, categoriesSelect }) {
+export default function Dropdown({ list, getList, setList }) {
   
 
   const removeDuplicateInList = (list) => {
@@ -13,7 +13,7 @@ export default function Dropdown({ list, categoriesSelect }) {
     const slug = target.getAttribute('slug');
 
     if (checked) {
-        categoriesSelect.setList(oldList => {
+        setList(oldList => {
             const newList =  [...oldList, {id, slug, name}];
             return removeDuplicateInList(newList)
         });
@@ -21,7 +21,7 @@ export default function Dropdown({ list, categoriesSelect }) {
         return;
     }
 
-    categoriesSelect.setList(categoriesSelect.listItems.filter(person => person.id !== id))    
+    setList(getList.filter(person => person.id !== id))    
     
     return;
   }
@@ -35,7 +35,7 @@ export default function Dropdown({ list, categoriesSelect }) {
                 <div className="my-2 p-1 flex border border-gray-200 bg-white rounded svelte-1l8159u">
                     <div className="flex flex-auto flex-wrap">
 
-                        {categoriesSelect.listItems.map(item => (     
+                        {getList.map(item => (     
                             <div 
                                 className="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-full text-teal-700 bg-teal-100 border border-teal-300 "
                                 key={item.id}    

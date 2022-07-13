@@ -3,9 +3,10 @@ import moment from 'moment';
 import Link from 'next/link';
 import { getSimilarPosts, getRecentPosts } from '../services' 
 import Image from 'next/image';
+import { isUrl } from '../lib/exception';
 
 const myLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
+  return `${src}`
 }
 
 export default function PostWidget({ categories, slug }) {
@@ -19,8 +20,11 @@ export default function PostWidget({ categories, slug }) {
       getRecentPosts()
           .then(result => setRelatedPosts(result))
     }
+
+   
   }, [slug, categories])
   
+ 
   return (
     <div className='bg-white lg:rounded-lg p-8 lg:mb-8 pt-0'>
       <h3 className='text-xl mb-8 font-semibold border-b pb-4 '>
@@ -31,7 +35,11 @@ export default function PostWidget({ categories, slug }) {
               <div className='w-16 flex-none'>
                   <Image 
                     loader={myLoader}
-                    src={post.featuredImage.url} 
+                    src={
+                      post?.featuredImage?.url 
+                      || post?.featuredImageUrl
+                      || '/bg.jpg'
+                    } 
                     alt={post.title}
                     height='40px'
                     width="60px"

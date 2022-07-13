@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { submitEmotions, getEmotions} from '../services';
 import Link from 'next/link';
-import { useRef } from 'react';
+// import { useRef } from 'react';
+// import { featuredImageException } from '../lib/exception';
 
 const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`;
@@ -42,6 +43,8 @@ export default function PostCard( {post} ) {
         }
     };
     
+    
+
   return (
     <div className="bg-white border-b rounded-lg mx-2 lg:p-8 py-4 lg:mb-8 flex flex-col">
       <div className=" flex flex-row">
@@ -74,17 +77,20 @@ export default function PostCard( {post} ) {
                         </svg> */}
                         <span className='text-xs'>{moment(post.createdAt).format('M /D/ YYYY, h:mm A')}</span>
                     </div>
-                    <div className="relative overflow-hidden shadow-md mb-6 hidden"> 
+                    {/* <div className="relative overflow-hidden shadow-md mb-6 hidden"> 
                         <Image
                             loader={myLoader} 
-                            src={post.featuredImage.url}
+                            src={featuredImageException(
+                                post.featuredImage?.url,
+                                post.featuredImageUrl
+                            )}
                             alt={post.title}
                             layout="responsive"
                             height="500px"
                             width='1000px'
                             className="object-top absolute object-cover shadow-lg lg:rounded-lg"
                         />
-                    </div>
+                    </div> */}
                     <h1 className="transition duration-700  mb-1 w-fit text-left cursor-pointer
                             hover:text-pink-600 text-xl font-normal
                     ">
