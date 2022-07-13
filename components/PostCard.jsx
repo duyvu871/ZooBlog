@@ -3,8 +3,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { submitEmotions, getEmotions} from '../services';
 import Link from 'next/link';
-// import { useRef } from 'react';
-// import { featuredImageException } from '../lib/exception';
 
 const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`;
@@ -13,7 +11,6 @@ const myLoader = ({ src, width, quality }) => {
 export default function PostCard( {post} ) {
     const [likes, setLikes] = useState(post.like);
     const [dislikes, setDislikes] = useState(post.dislike);
-
 
     const sendEmotions = (type) => {
         if (type === "like") {
@@ -42,7 +39,6 @@ export default function PostCard( {post} ) {
             });
         }
     };
-    
     
 
   return (
@@ -75,7 +71,7 @@ export default function PostCard( {post} ) {
                         {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg> */}
-                        <span className='text-xs'>{moment(post.createdAt).format('M /D/ YYYY, h:mm A')}</span>
+                        <span className='text-xs'>{moment(post.createdAt).format('D/M/YYYY, h:mm A')}</span>
                     </div>
                     {/* <div className="relative overflow-hidden shadow-md mb-6 hidden"> 
                         <Image
@@ -92,7 +88,7 @@ export default function PostCard( {post} ) {
                         />
                     </div> */}
                     <h1 className="transition duration-700  mb-1 w-fit text-left cursor-pointer
-                            hover:text-pink-600 text-xl font-normal
+                            hover:text-pink-600 text-[1rem] font-bold
                     ">
                         <Link href={`/post/${post.slug}`} passHref>
                             {post.title}
@@ -111,20 +107,21 @@ export default function PostCard( {post} ) {
                            ))
                        }
                     </div>
-                    {/* <div className='text-center'>
-                        <Link href={`/post/${post.slug}`} passHref>
-                            <span className='
-                                transition duration-500 transform 
-                                hover:-translate-y-1 inline-block 
-                                bg-pink-600 text-lg 
-                                font-medium rounded-full 
-                                px-8 py-3 
-                                text-white cursor-pointer
-                            '>
-                                Continue Reading
-                            </span>
+                   <div className='h-[250px]'>
+                        <Link href={`/post/${post.slug}`} passHref className='h-[250px] relative'>
+                            <> 
+                                <Image 
+                                    unoptimized
+                                    src={post?.featuredImage?.url || post?.featuredImageUrl || '/bg.jpg'} 
+                                    alt={post.title}
+                                    objectFit="contain"
+                                    layout='responsive'
+                                    height={1000}
+                                    width={1000}
+                                />
+                            </>
                         </Link>
-                    </div> */}
+                   </div>
             </div>
       </div>
       <div className="flex flex-row place-content-between p-6 text-[14px] font-semibold">

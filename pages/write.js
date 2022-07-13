@@ -3,11 +3,13 @@ import dynamic from 'next/dynamic';
 import FliedInput from '../components/Upload/FliedInput';
 import Dropdown from '../components/Upload/Dropdown';
 import { getCategories, getAuthors } from '../services';
+import { Loader } from '../components';
 
 const Editor = dynamic(() => import('../lib/Editor'), { ssr: false })
 
 const Write = ({ categories, authors }) => {
- 
+  const [isDisable, setDisableStatus] = useState(false);
+
   const [urlUpload, setUrlUpload] = useState('');
   const [title, setTitle] = useState('');
   const [excerpt, setExcerpt] = useState('');
@@ -16,7 +18,7 @@ const Write = ({ categories, authors }) => {
   const [author, setAuthor] = useState('');
   const [body, setBody] = useState('');
 
-  const handlebodydata = (e) => {
+  const handleBodyData = (e) => {
     setBody(e)
   }
 
@@ -24,7 +26,6 @@ const Write = ({ categories, authors }) => {
     url(url) {
         const isUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
         const success = isUrl.test(url)
-        if (!success) alert('URL không họp lệ nhập lại dùng cái')
 
         return {
             success,
@@ -33,7 +34,6 @@ const Write = ({ categories, authors }) => {
     },
     input(text, field) {
         const success = Boolean(text);
-        if (!success) alert(`${field} không họp lệ nhập lại dùng cái`)
 
         return {
             success,
@@ -42,16 +42,14 @@ const Write = ({ categories, authors }) => {
     },
     slugConvert(text) {
         const success = Boolean(text);
-        if (!success) alert('Slug không họp lệ nhập lại dùng cái')
-
+       
         return {
             success,
-            message: success ? text.trim().split(' ').join('-') : false
+            message: success ? text.trim().toLowerCase().split(' ').join('-') : false
         }
     },
     author(id) {
         const success = Boolean(id);
-        if (!success) alert('Author không họp lệ nhập lại dùng cái')
 
         return {
             success,
@@ -80,6 +78,7 @@ const Write = ({ categories, authors }) => {
     }
 
     if (isPublish) {
+        setDisableStatus(true);
         fetch('/api/create-post', {
             method: 'POST',
             headers: {
@@ -87,42 +86,37 @@ const Write = ({ categories, authors }) => {
             },
             body: JSON.stringify(data)
         }).then(res => {
-            if (res?.createPost?.id) {
-                alert('Dăng bài thành công')
+            console.log(res)
+            if (res.status === 200) {
+                alert('Đăng bài thành công')
             } else {
                 alert('không thành công, hãy thử lại sau')
             }
+
+            setDisableStatus(false)
         })
-        console.log(data);
+        // console.log(data);
     }
   }
 
+  const fieldInput = [
+    ['url-upload', '@', 'Url ảnh nền', validate.url, setUrlUpload, ],
+    ['title-upload', 'T', 'Title', validate.input, setTitle],
+    ['slug-upload', 'S','Slug (Viết ngắn gọn với không dấu nhé)', validate.slugConvert, setSlug],
+    ['excerpt-upload', 'E', 'Trích đoạn', validate.input, setExcerpt]
+  ]
+
   return (
     <>
-        <FliedInput 
-            setFieldUpload={setUrlUpload} 
-            icon={'@'} 
-            placeholder={'Image url'} 
-            validate={validate.url}
-        />
-        <FliedInput 
-            setFieldUpload={setTitle} 
-            icon={'T'} 
-            placeholder={'Title'} 
-            validate={validate.input}
-        />
-        <FliedInput 
-            setFieldUpload={setSlug} 
-            icon={'S'} 
-            placeholder={'Slug'}
-            validate={validate.slugConvert} 
-        />
-        <FliedInput 
-            setFieldUpload={setExcerpt} 
-            icon={'E'} 
-            placeholder={'Excerpt'}
-            validate={validate.input} 
-        />
+        {fieldInput.map(item => (
+            <FliedInput 
+                key={item[0]}
+                icon={item[1]} 
+                placeholder={item[2]} 
+                validate={item[3]}
+                setFieldUpload={item[4]} 
+           />
+        ))}
 
         <div className='mx-4'>
             <h1 className=' text-lg font-bold'>Categories</h1>
@@ -139,23 +133,26 @@ const Write = ({ categories, authors }) => {
             </select>
         </div>
 
-        <div className='mx-4 my-8 h-fit' id='editor-parent'>
-            <h1 className='text-lg font-bold'>Content</h1>
+        <div className=' my-8 h-fit' id='editor-parent'>
+            <h1 className='text-lg font-bold mx-4'>Content</h1>
             <Editor 
-                handlechange={handlebodydata} 
+                handlechange={handleBodyData} 
                 value={body} 
                 placeholder={'Viết nội dung vào đây....'} 
                 style={{height: '200px'}}
             />
         </div>
-        <div className='mx-4'>
+        <div className='mx-4 flex flex-row gap-[15px]'>
             <button 
                 onClick={uploadPost}
+                disabled={isDisable}
                 className="
                 py-2 px-4 bg-transparent font-semibold border border-red-600 rounded 
                 bg-red-600 text-white  border-transparent
                 "
             >Upload</button>
+        {isDisable && <Loader />}
+
         </div>
     </>
   )

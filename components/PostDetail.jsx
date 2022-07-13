@@ -26,20 +26,23 @@ export default function PostDetail({ post }) {
             modifiedText = (<u key={index}>{text}</u>);
           }
 
-          if (obj?.title == '(Image)') {
-            modifiedText = ( 
-                <Image
-                  // loader={myLoader}
-                  unoptimized
-                  key={index}
-                  alt={obj.title}
-                  height={obj?.height || 1000}
-                  width={obj?.width || 1000}
-                  // layout='responsive'
-                  objectFit='cover'
-                  src={obj?.href || '/bg.jpg'}
-                />
-            )
+          if (obj.href) {
+            if (obj?.title == '(Image)'|| /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(new URL(obj?.href).pathname)) {
+
+              modifiedText = ( 
+                  <Image
+                    // loader={myLoader}
+                    unoptimized
+                    key={index}
+                    alt={obj.title}
+                    height={obj?.height || 700 }
+                    width={obj?.width || 1000 }
+                    // layout='responsive'
+                    objectFit='contain'
+                    src={obj?.href || '/bg.jpg'}
+                  />
+              )
+            }
           }
         }
 
@@ -47,7 +50,7 @@ export default function PostDetail({ post }) {
             case 'heading-three':
               return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
             case 'paragraph':
-              return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
+              return <p key={index}>{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
             case 'heading-four':
               return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
             case 'image':
@@ -133,13 +136,13 @@ export default function PostDetail({ post }) {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg> 
-                    <span className='ml-2'>{moment(post.createdAt).format('DD/MM/YYYY')}</span>
+                    <span className='ml-2'>{moment(post.createdAt).format('D/M/YYYY')}</span>
                 </div>
             </div>
             <h1 className='mb-8 text-3xl font-semibold '>
                 {post.title}
             </h1>
-            <div className='relative overflow-hidden shadow-md mb-6 border-t-4 border-black-600'>
+            <div >
               <Image 
                   // loader={myLoader}
                   unoptimized
@@ -149,11 +152,11 @@ export default function PostDetail({ post }) {
                     || '/bg.jpg'
                   } 
                   alt={post.title}
-                  objectFit="cover"
+                  objectFit="contain"
                   layout='responsive'
-                  height={1000}
-                  width={1000}
-                  className='object-top lg:rounded-t-lg ' 
+                  height={'700'}
+                  width={'1000'}
+                  // className='object-top lg:rounded-t-lg ' 
               />
           </div>
            <pre className='post-render'>
