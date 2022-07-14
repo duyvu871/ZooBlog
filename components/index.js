@@ -11,4 +11,5 @@ export { default as FeaturedPosts } from './FeaturedPosts';
 export { default as Loader } from './Loader';
 export { default as ScrollToTop } from './ScrollToTop';
 export { default as Comment } from './Comment';
+export { default as Footer } from './Footer';
 

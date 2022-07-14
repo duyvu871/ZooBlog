@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { PostCard, Categories, PostWidget, FeaturedPosts, ScrollToTop, Author} from '../components';
+import { PostCard, Categories, PostWidget, FeaturedPosts, Footer } from '../components';
 import MenuUser from '../components/User/MenuUser'
 import { getPosts} from '../services';
 import { getSession } from 'next-auth/react';
@@ -31,6 +31,7 @@ const Home = ({ posts, user }) => {
           <div className="lg:sticky relative top-8">
               <PostWidget />
               <Categories />
+              <Footer />
           </div>
         </div>
       </div>

@@ -27,6 +27,7 @@ const PostDetails = ({ post }) =>  {
                         slug={post.slug} 
                     />
                     <Page.Categories />
+                    <Page.Footer />
                 </div>
             </div>
         </div>

@@ -66,27 +66,11 @@ export default function PostCard( {post} ) {
                 </div>
             </div>
             <div className='flex flex-col pr-3'>
-                    <p className="inline align-middle text-blue-600 text-sm">{post.author.name}</p>
-                    <div className="font-medium text-gray-700">
-                        {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg> */}
-                        <span className='text-xs'>{moment(post.createdAt).format('D/M/YYYY, h:mm A')}</span>
+                   
+                    <div className="flex flex-row items-center">
+                        <p className="inline align-middle text-blue-600 text-[14px] font-bold">{post.author.name}</p>
+                        <span className='text-xs font-medium text-gray-700'>{' - '}&#x1F558;{' '}{moment(post.createdAt).format('D/M/YYYY, h:mm A')}</span>
                     </div>
-                    {/* <div className="relative overflow-hidden shadow-md mb-6 hidden"> 
-                        <Image
-                            loader={myLoader} 
-                            src={featuredImageException(
-                                post.featuredImage?.url,
-                                post.featuredImageUrl
-                            )}
-                            alt={post.title}
-                            layout="responsive"
-                            height="500px"
-                            width='1000px'
-                            className="object-top absolute object-cover shadow-lg lg:rounded-lg"
-                        />
-                    </div> */}
                     <h1 className="transition duration-700  mb-1 w-fit text-left cursor-pointer
                             hover:text-pink-600 text-[1rem] font-bold
                     ">
@@ -107,19 +91,22 @@ export default function PostCard( {post} ) {
                            ))
                        }
                     </div>
-                   <div className='h-[250px]'>
-                        <Link href={`/post/${post.slug}`} passHref className='h-[250px] relative'>
-                            <> 
+                   <div className='mt-[10px] bg-gray-200'>
+                        <Link 
+                            href={`/post/${post.slug}`} 
+                            passHref 
+                        >
+                            <div className=' relative'> 
                                 <Image 
                                     unoptimized
                                     src={post?.featuredImage?.url || post?.featuredImageUrl || '/bg.jpg'} 
                                     alt={post.title}
                                     objectFit="contain"
                                     layout='responsive'
-                                    height={1000}
+                                    height={1000 / (16/9)}
                                     width={1000}
                                 />
-                            </>
+                            </div>
                         </Link>
                    </div>
             </div>
