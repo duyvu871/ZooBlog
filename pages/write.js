@@ -1,14 +1,55 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import dynamic from 'next/dynamic';
 import FliedInput from '../components/Upload/FliedInput';
 import Dropdown from '../components/Upload/Dropdown';
 import { getCategories, getAuthors } from '../services';
 import { Loader } from '../components';
+import Image from 'next/image';
 
 const Editor = dynamic(() => import('../lib/Editor'), { ssr: false })
+const Field = ({field , cancelBtn, saveBtn}) => {
+    return (
+    <div className="p-2 bg-white border shadow rounded w-ful mx-[auto] my-[15px] ">
+            <div className="flex justify-between items-center text-[10px]">
+                <input 
+                    type="search" 
+                    className="w-full bg-gray-100 rounded p-1 mr-2 border focus:outline-none focus:border-blue-500" 
+                    placeholder={field.title}
+                    ref={field.element}
+                />
+
+                <div className="flex justify-center items-center space-x-2">
+                    <button 
+                        type="button"  
+                        className="btn bg-gray-200 hover:bg-gray-300 px-2 py-2 font-medium rounded w-[50px]"
+                        ref={cancelBtn}
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="button" 
+                        className="btn bg-blue-500 hover:bg-blue-600 text-white px-2 py-2 font-medium rounded w-[50px]"
+                        ref={saveBtn}
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+	</div>
+    )
+}
 
 const Write = ({ categories, authors }) => {
   const [isDisable, setDisableStatus] = useState(false);
+
+  const [imagePreview, setImagePreview] = useState('');
+  const [isPreview, setPreview] = useState(false);
+
+  const saveBtn = useRef('');
+  const cancelBtn = useRef('');
+  const fieldEl = useRef('');
+  const [fieldShow, setFieldShow] = useState(false);
+  const [fieldTitle, setFieldTitle] = useState('');
 
   const [urlUpload, setUrlUpload] = useState('');
   const [title, setTitle] = useState('');
@@ -26,6 +67,15 @@ const Write = ({ categories, authors }) => {
     url(url) {
         const isUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
         const success = isUrl.test(url)
+        setPreview(false);
+
+        if (success) {
+            const isImage =  /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(new URL(url).pathname);
+            if (isImage) {
+                setImagePreview(url)
+                setPreview(true)
+            }
+        }
 
         return {
             success,
@@ -107,7 +157,21 @@ const Write = ({ categories, authors }) => {
   ]
 
   return (
-    <>
+    <div className='flex flex-col'>
+            {
+                isPreview && 
+                <div className='relative bg-gray-200 rounded-lg p-2 mx-2'>
+                    <Image 
+                        src={imagePreview}
+                        unoptimized
+                        objectFit='contain'
+                        layout='responsive'
+                        width={1000}
+                        height={700}
+                    />
+                </div>
+            }
+        
         {fieldInput.map(item => (
             <FliedInput 
                 key={item[0]}
@@ -135,10 +199,33 @@ const Write = ({ categories, authors }) => {
 
         <div className=' my-8 h-fit' id='editor-parent'>
             <h1 className='text-lg font-bold mx-4'>Content</h1>
+           <div className='mx-[15px]'>
+                {   fieldShow && 
+                    <Field  
+                        field={{
+                            title: fieldTitle,
+                            element: fieldEl
+                        }} 
+                        saveBtn={saveBtn}
+                        cancelBtn={cancelBtn} 
+                    />
+                }   
+           </div>
             <Editor 
                 handlechange={handleBodyData} 
                 value={body} 
-                placeholder={'Viết nội dung vào đây....'} 
+                placeholder={'Viết nội dung vào đây....'}
+                field={{
+                    title: {
+                        setFieldTitle,
+                    },
+                    setFieldShow,
+                    fieldEl,
+                    inputBtn: {
+                        cancelBtn,
+                        saveBtn
+                    }
+                }}
                 style={{height: '200px'}}
             />
         </div>
@@ -151,10 +238,10 @@ const Write = ({ categories, authors }) => {
                 bg-red-600 text-white  border-transparent
                 "
             >Upload</button>
-        {isDisable && <Loader />}
+            {isDisable && <Loader />}
 
         </div>
-    </>
+    </div>
   )
 }
 

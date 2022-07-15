@@ -12,7 +12,7 @@ const Home = ({ posts, user }) => {
     <div className="container mx-auto mb-8 ">
       <Head>
         <title>My Blog</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/bg.jpg" />
       </Head>
      
 
