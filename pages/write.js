@@ -39,6 +39,17 @@ const Field = ({field , cancelBtn, saveBtn}) => {
     )
 }
 
+const SelectAuthor = ({ authors, setAuthor }) => {
+    return (
+        <select name="author" id="" className=' border-2' onChange={({target}) => setAuthor(validate.author(target.value || authors[0].id)) }>
+            <option value="" >Chọn tác giả</option>
+            {authors.map(author => (
+            <option value={author.id} key={author.id}>{author.name}</option>
+            ))}
+        </select>
+    )
+}
+
 const Write = ({ categories, authors }) => {
   const [isDisable, setDisableStatus] = useState(false);
 
@@ -158,20 +169,18 @@ const Write = ({ categories, authors }) => {
 
   return (
     <div className='flex flex-col'>
-            {
-                isPreview && 
-                <div className='relative bg-gray-200 rounded-lg p-2 mx-2'>
-                    <Image 
-                        src={imagePreview}
-                        unoptimized
-                        objectFit='contain'
-                        layout='responsive'
-                        width={1000}
-                        height={700}
-                    />
-                </div>
-            }
-        
+        {isPreview 
+            && 
+        <div className='relative bg-gray-200 rounded-lg p-2 mx-2'>
+            <Image 
+                src={imagePreview}
+                unoptimized
+                objectFit='contain'
+                layout='responsive'
+                width={1000}
+                height={700}
+            />            
+        </div>}
         {fieldInput.map(item => (
             <FliedInput 
                 key={item[0]}
@@ -181,44 +190,34 @@ const Write = ({ categories, authors }) => {
                 setFieldUpload={item[4]} 
            />
         ))}
-
         <div className='mx-4'>
             <h1 className=' text-lg font-bold'>Categories</h1>
             <Dropdown list={categories} getList={categoriesList} setList={setCategoriesList} />
         </div>
-
         <div className='mx-4'>
             <h1 className='text-lg font-bold'>Author</h1>
-            <select name="author" id="" className=' border-2' onChange={({target}) => setAuthor(validate.author(target.value || authors[0].id)) }>
-            <option value="" disabled hidden>Chọn tác giả</option>
-                {authors.map(author => (
-                  <option value={author.id} key={author.id}>{author.name}</option>
-                ))}
-            </select>
+            <SelectAuthor authors={authors} setAuthor={setAuthor} />
         </div>
-
         <div className=' my-8 h-fit' id='editor-parent'>
             <h1 className='text-lg font-bold mx-4'>Content</h1>
-           <div className='mx-[15px]'>
-                {   fieldShow && 
-                    <Field  
-                        field={{
-                            title: fieldTitle,
-                            element: fieldEl
-                        }} 
-                        saveBtn={saveBtn}
-                        cancelBtn={cancelBtn} 
-                    />
-                }   
-           </div>
+            <div className='mx-[15px]'>
+                {fieldShow 
+                    && 
+                <Field  
+                    field={{
+                        title: fieldTitle,
+                        element: fieldEl
+                    }} 
+                    saveBtn={saveBtn}
+                    cancelBtn={cancelBtn} 
+                />}   
+            </div>
             <Editor 
                 handlechange={handleBodyData} 
                 value={body} 
                 placeholder={'Viết nội dung vào đây....'}
                 field={{
-                    title: {
-                        setFieldTitle,
-                    },
+                    title: {setFieldTitle},
                     setFieldShow,
                     fieldEl,
                     inputBtn: {
@@ -239,14 +238,12 @@ const Write = ({ categories, authors }) => {
                 "
             >Upload</button>
             {isDisable && <Loader />}
-
         </div>
     </div>
   )
 }
 
-export default Write
-
+export default Write;
 
 export async function getServerSideProps() {
     const categories = (await getCategories()) || [];
