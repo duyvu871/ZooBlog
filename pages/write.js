@@ -128,7 +128,7 @@ const Write = ({ categories, authors }) => {
         excerpt: excerpt.message,
         slug: slug.message,
         categories: categoriesList,
-        authorID: author.message,
+        authorID: author,
     }
 
     for (const key in data) {
