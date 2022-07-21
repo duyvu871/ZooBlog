@@ -28,7 +28,7 @@ export default function Dropdown({ list, getList, setList }) {
 
 
   return (
-<div className="w-full md:w-1/2 flex flex-col items-center h-[200px] mx-auto">
+<div className="w-full md:w-1/2 flex flex-col items-center h-fit mx-auto">
     <div className="w-full">
         <div className="flex flex-col items-center relative">
             <div className="w-full  svelte-1l8159u">
@@ -67,7 +67,7 @@ export default function Dropdown({ list, getList, setList }) {
                     </div>
                 </div>
             </div>
-            <div className="absolute shadow top-100 bg-white z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj">
+            <div className="relative shadow top-100 bg-white z-40 w-full lef-0 rounded max-h-select overflow-y-auto svelte-5uyqqj">
                 <div className="flex flex-col w-full">
 
                     {list.map(item => (
