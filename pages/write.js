@@ -41,7 +41,7 @@ const Field = ({field , cancelBtn, saveBtn}) => {
 
 const SelectAuthor = ({ authors, setAuthor }) => {
     return (
-        <select name="author" id="" className=' border-2' onChange={({target}) => setAuthor(validate.author(target.value || authors[0].id)) }>
+        <select name="author" id="" className=' border-2' onChange={({target}) => setAuthor(target.value || authors[0].id) }>
             <option value="" >Chọn tác giả</option>
             {authors.map(author => (
             <option value={author.id} key={author.id}>{author.name}</option>
