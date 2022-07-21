@@ -190,11 +190,11 @@ const Write = ({ categories, authors }) => {
                 setFieldUpload={item[4]} 
            />
         ))}
-        <div className='mx-4'>
+        <div className='mx-4 my-4'>
             <h1 className=' text-lg font-bold'>Categories</h1>
             <Dropdown list={categories} getList={categoriesList} setList={setCategoriesList} />
         </div>
-        <div className='mx-4'>
+        <div className='mx-4 my-4'>
             <h1 className='text-lg font-bold'>Author</h1>
             <SelectAuthor authors={authors} setAuthor={setAuthor} />
         </div>
