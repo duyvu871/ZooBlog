@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router';
 import {getPosts, getPostsDetails } from '../../services'
 import * as Page from '../../components';
+import Head from 'next/head'
 
 const PostDetails = ({ post }) =>  {
    const router = useRouter()
@@ -11,6 +12,17 @@ const PostDetails = ({ post }) =>  {
 
   return (
     <div className='container mx-auto mb-8'>
+     <Head>
+      <meta property="og:image" content={post?.featuredImage?.url || post?.featuredImageUrl || '/bg.jpg'} />
+
+      <meta property="og:title" content={post.title} />
+
+      <meta property="og:description" content={post.excerpt} />
+
+      <meta property="og:image:width" content="1200"/>
+
+      <meta property="og:image:height" content="630"/>
+     </Head>
         <div className='grid grid-cols-1 lg:grid-cols-12 lg:gap-12'>
             <div className='col-span-1 lg:col-span-8'>
                 <Page.PostDetail post={post} />
@@ -27,6 +39,7 @@ const PostDetails = ({ post }) =>  {
                         slug={post.slug} 
                     />
                     <Page.Categories />
+                    <Page.Footer />
                 </div>
             </div>
         </div>
@@ -36,7 +49,7 @@ const PostDetails = ({ post }) =>  {
 
 export default PostDetails
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const data = await getPostsDetails(params.slug);
     
     return {
@@ -44,13 +57,15 @@ export async function getStaticProps({ params }) {
     }
 }
 
-export async function getStaticPaths() {
-    const posts = await getPosts();
-
-    return {
-        paths: posts.map(
-            ({ node: { slug } }) => ({params: {slug}})
-        ),
-        fallback: true
-    }
-}
+// export async function getStaticPaths() {
+//     const posts = await getPosts();
+//     console.log(posts.map(
+//         ({ node: { slug } }) => ({params: {slug}})
+//     ))
+//     return {
+//         paths: posts.map(
+//             ({ node: { slug } }) => ({params: {slug}})
+//         ),
+//         fallback: true
+//     }
+// }

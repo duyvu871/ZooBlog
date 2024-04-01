@@ -34,6 +34,7 @@ export const getPosts = async () => {
                         featuredImage {
                             url
                         }
+                        featuredImageUrl
                         categories {
                             name
                             slug
@@ -60,6 +61,7 @@ export const getRecentPosts = async () => {
                 featuredImage {
                     url
                 }
+                featuredImageUrl
                 createdAt
                 slug
             }
@@ -87,6 +89,7 @@ export const getSimilarPosts = async (slug, categories) => {
                 featuredImage {
                     url
                 }
+                featuredImageUrl
                 createdAt
                 slug
             }
@@ -102,6 +105,7 @@ export const getCategories = async () => {
             categories {
                 name
                 slug
+                id
               }
         }
     `
@@ -134,6 +138,7 @@ export const getPostsDetails = async (slug) => {
                 featuredImage {
                     url
                 }
+                featuredImageUrl
                 categories {
                     name
                     slug
@@ -189,9 +194,15 @@ export const getCategoryPost = async (slug) => {
                 bio
                 name
                 id
+                follows
                 photo {
                   url
                 }
+              }
+              like
+              dislike
+              comments {
+                  id
               }
               createdAt
               slug
@@ -200,6 +211,7 @@ export const getCategoryPost = async (slug) => {
               featuredImage {
                 url
               }
+              featuredImageUrl
               categories {
                 name
                 slug
@@ -217,7 +229,7 @@ export const getCategoryPost = async (slug) => {
   
   export const getFeaturedPosts = async () => {
     const query = gql`
-      query GetCategoryPost() {
+      query GetFeaturedPost() {
         posts(where: {featuredPost: true}) {
           author {
             name
@@ -228,6 +240,7 @@ export const getCategoryPost = async (slug) => {
           featuredImage {
             url
           }
+          featuredImageUrl
           title
           slug
           createdAt
@@ -239,6 +252,7 @@ export const getCategoryPost = async (slug) => {
   
     return result.posts;
   };
+
 
 export const submitEmotions = async (obj) => {
     const result = await fetch('/api/emotions',{
@@ -265,4 +279,19 @@ export const getEmotions = async (option) => {
     const result = await request(graphqlAPI, query, option);
 
     return result.post
+}
+
+export const getAuthors = async () => {
+    const query = gql`
+        query GetAuthors {
+            authors {
+                name
+                id
+            }
+        }
+    `;
+
+    const result = await request(graphqlAPI, query);
+
+    return result.authors
 }

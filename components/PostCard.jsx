@@ -1,19 +1,16 @@
-import React from 'react'
 import moment from 'moment';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { submitEmotions, getEmotions} from '../services';
+import Link from 'next/link';
 
 const myLoader = ({ src, width, quality }) => {
-    return src;
+    return `${src}?w=${width}&q=${quality || 75}`;
 };
 
 export default function PostCard( {post} ) {
     const [likes, setLikes] = useState(post.like);
     const [dislikes, setDislikes] = useState(post.dislike);
-
-    
 
     const sendEmotions = (type) => {
         if (type === "like") {
@@ -26,7 +23,7 @@ export default function PostCard( {post} ) {
                     id: post.id,
                     slug: post.slug,
                 }).then(_ => {
-                    setLikes(res.likelike + 1);
+                    setLikes(res.like + 1);
                 });
             });
         } else if (type === "dislike") {
@@ -43,6 +40,7 @@ export default function PostCard( {post} ) {
         }
     };
     
+
   return (
     <div className="bg-white border-b rounded-lg mx-2 lg:p-8 py-4 lg:mb-8 flex flex-col">
       <div className=" flex flex-row">
@@ -68,26 +66,13 @@ export default function PostCard( {post} ) {
                 </div>
             </div>
             <div className='flex flex-col pr-3'>
-                    <p className="inline align-middle text-blue-600 text-sm">{post.author.name}</p>
-                    <div className="font-medium text-gray-700">
-                        {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg> */}
-                        <span className='text-xs'>{moment(post.createdAt).format('M /D/ YYYY, h:mm A')}</span>
-                    </div>
-                    <div className="relative overflow-hidden shadow-md mb-6 hidden"> 
-                        <Image
-                            loader={myLoader} 
-                            src={post.featuredImage.url}
-                            alt={post.title}
-                            layout="responsive"
-                            height="500px"
-                            width='1000px'
-                            className="object-top absolute object-cover shadow-lg lg:rounded-lg"
-                        />
+                   
+                    <div className="flex flex-row items-center">
+                        <p className="inline align-middle text-blue-600 text-[14px] font-bold">{post.author.name}</p>
+                        <span className='text-xs font-medium text-gray-700'>{' - '}&#x1F558;{' '}{moment(post.createdAt).format('D/M/YYYY, h:mm A')}</span>
                     </div>
                     <h1 className="transition duration-700  mb-1 w-fit text-left cursor-pointer
-                            hover:text-pink-600 text-xl font-normal
+                            hover:text-pink-600 text-[1rem] font-bold
                     ">
                         <Link href={`/post/${post.slug}`} passHref>
                             {post.title}
@@ -106,20 +91,24 @@ export default function PostCard( {post} ) {
                            ))
                        }
                     </div>
-                    {/* <div className='text-center'>
-                        <Link href={`/post/${post.slug}`} passHref>
-                            <span className='
-                                transition duration-500 transform 
-                                hover:-translate-y-1 inline-block 
-                                bg-pink-600 text-lg 
-                                font-medium rounded-full 
-                                px-8 py-3 
-                                text-white cursor-pointer
-                            '>
-                                Continue Reading
-                            </span>
+                   <div className='mt-[10px] bg-gray-200'>
+                        <Link 
+                            href={`/post/${post.slug}`} 
+                            passHref 
+                        >
+                            <div className=' relative'> 
+                                <Image 
+                                    unoptimized
+                                    src={post?.featuredImage?.url || post?.featuredImageUrl || '/bg.jpg'} 
+                                    alt={post.title}
+                                    objectFit="contain"
+                                    layout='responsive'
+                                    height={1000 / (16/9)}
+                                    width={1000}
+                                />
+                            </div>
                         </Link>
-                    </div> */}
+                   </div>
             </div>
       </div>
       <div className="flex flex-row place-content-between p-6 text-[14px] font-semibold">

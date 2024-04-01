@@ -2,14 +2,14 @@ import React from 'react'
 import Image from 'next/image'
 
 const myLoader = ({ src, width, quality }) => {
-  return src
+  return `${src}?w=${width}&q=${quality || 75}`
 }
 
 export default function Author({ author }) {
   
   return (
     <div className='px-10'> 
-        <Image 
+        <Image
           loader={myLoader}
           src={author.background.url} 
           alt=""

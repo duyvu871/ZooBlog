@@ -54,7 +54,16 @@ const FeaturedPosts = () => {
 
   return (
     <div className="mb-8 mx-2">
-      <Carousel infinite customLeftArrow={customLeftArrow} customRightArrow={customRightArrow} responsive={responsive} itemClass="px-1">
+      <Carousel 
+        infinite={true}
+        autoPlay={true}
+        // customLeftArrow={customLeftArrow} 
+        // customRightArrow={customRightArrow} 
+        responsive={responsive} 
+        showDots={false}
+        removeArrowOnDeviceType={['mobile']}
+        itemClass="px-1"
+      >
         {dataLoaded && featuredPosts.slice().reverse().map((post, index) => (
           <FeaturedPostCard key={index} post={post} />
         ))}
