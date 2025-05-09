@@ -25,7 +25,7 @@ export default function Comments({ slug , isUpdate}) {
                         <span className='font-semibold'>{comment.name}</span>
                         {' - '}&#x1F558;{' '}{moment(comment.createdAt).format('M /D/ YYYY, h:mm A')}
                     </p>
-                    <p className='whitespace-pre-line text-gray-600 w-full'>{parse(comment.comment)}</p>
+                    <p className='whitespace-pre-line text-gray-600 w-full'>{comment.comment}</p>
                 </div>
             ))}
           </div>
